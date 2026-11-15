@@ -103,6 +103,7 @@
       .bs-header-detail__value { color: #120b3d; font-size: 12px; font-weight: 600; white-space: nowrap; }
       .framer-5eIzo [data-framer-name="Left"] { gap: 12px !important; }
       .framer-5eIzo [data-framer-name="Actions"] { gap: 12px !important; }
+      .framer-a0o3cp { opacity: 1 !important; transform: none !important; }
       @media (max-width: 959px) { .bs-header-detail { display: none !important; } }
     </style>
     <script>
@@ -132,8 +133,13 @@
           });
         };
 
-        if (document.readyState === 'complete') addHeaderDetails();
-        else window.addEventListener('load', addHeaderDetails, { once: true });
+        const main = document.getElementById('main');
+        if (main) {
+          const observer = new MutationObserver(addHeaderDetails);
+          observer.observe(main, { childList: true, subtree: true });
+        }
+        addHeaderDetails();
+        window.addEventListener('load', addHeaderDetails, { once: true });
       })();
     </script>
     <!-- End of bodyEnd -->
