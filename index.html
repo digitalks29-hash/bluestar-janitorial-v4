@@ -103,7 +103,45 @@
 <svg id="876389144" display="block" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 2.856 16.644 C 1.993 15.782 2.565 13.97 2.126 12.908 C 1.671 11.813 0 10.922 0 9.75 C 0 8.578 1.671 7.688 2.126 6.592 C 2.565 5.531 1.993 3.718 2.856 2.856 C 3.718 1.993 5.531 2.565 6.592 2.126 C 7.692 1.671 8.578 0 9.75 0 C 10.922 0 11.813 1.671 12.908 2.126 C 13.97 2.565 15.782 1.993 16.644 2.856 C 17.507 3.718 16.935 5.53 17.374 6.592 C 17.829 7.692 19.5 8.578 19.5 9.75 C 19.5 10.922 17.829 11.813 17.374 12.908 C 16.935 13.97 17.507 15.782 16.644 16.644 C 15.782 17.507 13.97 16.935 12.908 17.374 C 11.813 17.829 10.922 19.5 9.75 19.5 C 8.578 19.5 7.688 17.829 6.592 17.374 C 5.531 16.935 3.718 17.507 2.856 16.644 Z" fill-opacity="var(--1m6trwb, 0)" fill="var(--21h8s6, rgb(0, 0, 0))" height="19.5px" id="Hb1Z2mXax" transform="translate(2.25 2.25)" width="19.5px"/><path d="M 2.856 16.644 C 1.993 15.782 2.565 13.97 2.126 12.908 C 1.671 11.813 0 10.922 0 9.75 C 0 8.578 1.671 7.688 2.126 6.592 C 2.565 5.531 1.993 3.718 2.856 2.856 C 3.718 1.993 5.531 2.565 6.592 2.126 C 7.692 1.671 8.578 0 9.75 0 C 10.922 0 11.813 1.671 12.908 2.126 C 13.97 2.565 15.782 1.993 16.644 2.856 C 17.507 3.718 16.935 5.53 17.374 6.592 C 17.829 7.692 19.5 8.578 19.5 9.75 C 19.5 10.922 17.829 11.813 17.374 12.908 C 16.935 13.97 17.507 15.782 16.644 16.644 C 15.782 17.507 13.97 16.935 12.908 17.374 C 11.813 17.829 10.922 19.5 9.75 19.5 C 8.578 19.5 7.688 17.829 6.592 17.374 C 5.531 16.935 3.718 17.507 2.856 16.644 Z" fill="transparent" height="19.5px" id="zUTIozC0Y" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(2.25 2.25)" width="19.5px"/><path d="M 0 3 L 2.25 5.25 L 7.5 0" fill="transparent" height="5.25px" id="tNeITiQIS" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="var(--pgex8v, 1.5)" stroke="var(--21h8s6, rgb(0, 0, 0))" transform="translate(8.25 9.75)" width="7.5px"/></svg>
 </div>
 	<!-- Start of bodyEnd -->
-    
+    <style>
+      .bs-header-detail { display: flex; flex: 0 1 auto; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; font-family: Sora, sans-serif; line-height: 1.25; }
+      .bs-header-detail__label { color: #705900; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      .bs-header-detail__value { color: #120b3d; font-size: 12px; font-weight: 600; white-space: nowrap; }
+      .framer-5eIzo [data-framer-name="Left"] { gap: 12px !important; }
+      .framer-5eIzo [data-framer-name="Actions"] { gap: 12px !important; }
+      @media (max-width: 959px) { .bs-header-detail { display: none !important; } }
+    </style>
+    <script>
+      (() => {
+        const addHeaderDetails = () => {
+          document.querySelectorAll('.framer-5eIzo [data-framer-name="Bar"]').forEach((bar) => {
+            const left = bar.querySelector('[data-framer-name="Left"]');
+            const actions = bar.querySelector('[data-framer-name="Actions"]');
+            if (!left || !actions || bar.querySelector('.bs-header-detail')) return;
+
+            const createDetail = (label, value, className) => {
+              const detail = document.createElement('div');
+              detail.className = `bs-header-detail ${className}`;
+              detail.setAttribute('aria-label', `${label}: ${value}`);
+              const heading = document.createElement('span');
+              heading.className = 'bs-header-detail__label';
+              heading.textContent = label;
+              const content = document.createElement('span');
+              content.className = 'bs-header-detail__value';
+              content.textContent = value;
+              detail.append(heading, content);
+              return detail;
+            };
+
+            left.append(createDetail('Our Location', 'Garland, TX 75041', 'bs-header-location'));
+            actions.prepend(createDetail('Working Hours', 'Mon – Sun · Open 24 Hours', 'bs-header-hours'));
+          });
+        };
+
+        if (document.readyState === 'complete') addHeaderDetails();
+        else window.addEventListener('load', addHeaderDetails, { once: true });
+      })();
+    </script>
     <!-- End of bodyEnd -->
 </body>
 </html>
